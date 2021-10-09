@@ -1,0 +1,24 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #2a363b;
+}
+.title {
+  margin: 20px 0;
+  padding: 10px 0;
+  font-size: 30px;
+
+  text-align: center;
+  text-transform: uppercase;
+
+  color: #2cac60;
+
+  border-bottom: 2px solid #2cac60;
+}
+
+@media screen and (min-width: 1024px) {
+  .title {
+    text-align: left;
+  }
+}
