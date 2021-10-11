@@ -1,16 +1,16 @@
-import { AuthNav } from '../AuthNav/AuthNav';
-//import { RegisterForm } from 'views/RegisterForm/RegisterForm';
 import s from './AppBar.module.css';
+import Navigation from 'components/Navigation';
+import AuthNav from 'components/AuthNav';
+import LogoutBtn from 'components/LogoutBtn';
 
-function AppBar () {
-  
-  return (
+const AppBar = () => {
+    return (
       <header className={s.header}>
-        <h1 className="title">Phonebook</h1>
-          
-      <AuthNav/>      
+          <Navigation/>
+          <AuthNav />
+          <LogoutBtn/>
     </header>
-  );
+    )
 }
 
-export { AppBar };
+export default AppBar;

@@ -1,0 +1,13 @@
+.link {
+  padding: 10px 0;
+  font-size: 30px;
+
+  text-align: left;
+  text-transform: uppercase;
+
+  color: #2a363b;
+}
+
+.activeLink {
+  color: #2cac60;
+}
