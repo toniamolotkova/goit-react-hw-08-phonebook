@@ -2,7 +2,7 @@ import axios from "axios";
 //import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-axios.defaults.baseURL = 'http://localhost:3001';
+//axios.defaults.baseURL = 'http://localhost:3001';
 
 export async function fetchContacts() {
     const { data } = await axios.get('./contacts');

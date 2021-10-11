@@ -4,8 +4,8 @@ import Container from 'components/Container';
 import HomePage from 'views/HomePage';
 import ContactsPage from 'views/ContactsPage';
 import { Switch, Route } from 'react-router-dom';
-import RegisterPage from 'views/RegisterPage';
-import LoginPage from 'views/LoginPage';
+import RegisterPage from 'views/Registration';
+import LoginPage from 'views/Login';
 import AppBar from 'components/AppBar';
 
 function App() {

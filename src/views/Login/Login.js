@@ -1,31 +1,35 @@
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { MyTextInput } from 'components/MyTextInput/MyTextInput';
-import { isValidElement } from 'react';
+//import { isValidElement } from 'react';
+import authOperations from 'redux/auth/auth-operations';
+import { useDispatch } from 'react-redux';
 
 const validationSchema = Yup.object({
   email: Yup.string().email('Invalid email address').required('Required'),
   password: Yup.string()
-    .min(6, 'Min 6 symbols')
+    .min(6, 'Min 8 symbols')
     .max(20, 'Max 15 symbols')
     .required('Required'),
 });
 
-const LoginPage = () => {
+const Login = () => {
+  const dispatch = useDispatch();
+
     return (
     <Formik
       initialValues={{ email: '', password: '' }}
-      validate={{ validationSchema }}
-            onSubmit={(values, {setSubmitting}) => {
-        // dispatch(authOperations.register({ name, email, password }));
-        // initialValues.email = '';
-        // initialValues.password = '';
-         console.log(values);
-        setSubmitting(false);
+      validationSchema={validationSchema}
+        onSubmit={(values, { setSubmitting }) => {
+          const { email, password } = values;
+
+        dispatch(authOperations.logIn({ email, password }));
+          setSubmitting(false);
+
 
    }}
     >
-      <Form>
+        <Form >
         <MyTextInput
              label="Email Address"
              name="email"
@@ -36,13 +40,13 @@ const LoginPage = () => {
           name="password"
           type="password"
         />
-         <button disabled={!isValidElement}  type="submit">Submit</button>
+         <button type="submit">Submit</button>
       </Form>
 
     </Formik>
   );
 };
 
-export default LoginPage;
+export default Login;
 
 
