@@ -1,24 +1,47 @@
+import { useDispatch } from 'react-redux';
+import { useEffect, Suspense, lazy } from 'react';
+import { Switch } from 'react-router-dom';
+import authOperations from 'redux/auth/auth-operations';
 import { ToastContainer } from 'react-toastify';
-
 import Container from 'components/Container';
-import HomePage from 'views/HomePage';
-import ContactsPage from 'views/ContactsPage';
-import { Switch, Route } from 'react-router-dom';
-import RegisterPage from 'views/Registration';
-import LoginPage from 'views/Login';
 import AppBar from 'components/AppBar';
 
+import PrivateRoute from 'components/PrivateRoute';
+import PublicRoute from 'components/PublicRoute';
+
+
+const HomePage = lazy(() => import('./views/HomePage'));
+const ContactsPage = lazy(() => import('./views/ContactsPage'));
+const Registration = lazy(() => import('./views/Registration'));
+const Login = lazy(() => import('./views/Login'));
+
+
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(authOperations.fetchCurrentUser())
+  }, [dispatch])
     return (
       <>
         <Container>
-        <AppBar/>
-              <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/register" component={RegisterPage} />
-        <Route path="/login" component={LoginPage} />
-        <Route path="/contacts" component={ContactsPage} />
-      </Switch>
+          <AppBar />
+          <Switch>
+            <Suspense fallback={<p>Загружаем...</p>}>
+              <PublicRoute exact path="/">
+                <HomePage/>
+              </PublicRoute>
+              <PublicRoute exact path="/register" restricted>
+                <Registration/>
+              </PublicRoute>
+              <PublicRoute exact path="/login" redirectTo="/contacts" restricted>
+                <Login/>
+              </PublicRoute>
+              <PrivateRoute path="/contacts" redirectTo="/login">
+                <ContactsPage/>
+              </PrivateRoute>
+            </Suspense>  
+          </Switch>
         </Container>
         
          <ToastContainer />

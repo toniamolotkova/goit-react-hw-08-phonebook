@@ -20,28 +20,34 @@ const Login = () => {
     <Formik
       initialValues={{ email: '', password: '' }}
       validationSchema={validationSchema}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={(values, { setSubmitting, resetForm }) => {
           const { email, password } = values;
 
         dispatch(authOperations.logIn({ email, password }));
           setSubmitting(false);
+          resetForm({ values: '' })
 
 
    }}
-    >
-        <Form >
+      >
+        {(formik) => (
+              <Form >
         <MyTextInput
              label="Email Address"
              name="email"
              type="email"
-             placeholder="jane@formik.com"/>
+            placeholder="jane@formik.com"
+          autoComplete="on"/>
         <MyTextInput
           label="Your password"
           name="password"
-          type="password"
+            type="password"
+            autoComplete="on"
         />
-         <button type="submit">Submit</button>
+         <button type="submit" disabled={!(formik.dirty && formik.isValid)}>Submit</button>
       </Form>
+        )}
+    
 
     </Formik>
   );

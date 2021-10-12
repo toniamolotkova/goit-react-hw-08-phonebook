@@ -15,7 +15,7 @@ const validationSchema = Yup.object({
     .max(20, 'Max 15 symbols')
         .required('Required'),
     confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Passwords must match')
+    .oneOf([Yup.ref('password'), null], 'Passwords must match').required('Required')
   
 });
 
@@ -30,11 +30,12 @@ const Registration = () => {
     confirmPassword: ''
   }
 
-  const handleSubmit = useCallback((values, { setSubmitting }) => {
+  const handleSubmit = useCallback((values, { setSubmitting, resetForm }) => {
     const { name, email, password } = values;
     dispatch(authOperations.register({name, email, password}));
     console.log(values)
     setSubmitting(false);
+    resetForm({values: ''})
   }, [dispatch])
 
     return (
@@ -43,6 +44,7 @@ const Registration = () => {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
       >
+        {(formik) => (
           <Form className={s.form}>
           <MyTextInput
           label="Your name"
@@ -67,11 +69,9 @@ const Registration = () => {
           name="confirmPassword"
           type="password"/>
 
-            <button type="submit">Submit</button>
+            <button type="submit" disabled={!(formik.dirty && formik.isValid)}>Submit</button>
       </Form>
-    
-        
-
+        ) }
     </Formik>
   );
 };

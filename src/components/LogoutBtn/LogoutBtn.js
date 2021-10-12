@@ -11,7 +11,7 @@ const LogoutBtn = () => {
     return (
             <div className={s.container}>
         <p className={s.name}>Добро пожаловать, { name}</p>
-        <button className={s.btn} type="button" onClick={() => dispatch(authOperations.logOut)}>
+        <button className={s.btn} type="button" onClick={() => dispatch(authOperations.logOut())}>
         Logout
       </button>
     </div>
