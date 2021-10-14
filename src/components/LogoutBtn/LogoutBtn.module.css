@@ -1,9 +1,64 @@
 .container {
   display: flex;
+  flex-direction: column;
+
   align-items: center;
 }
 
 .name {
+  margin-bottom: 5px;
+  font-size: 14px;
   font-weight: 700;
-  margin-right: 12;
+
+  text-align: right;
+
+  color: #2a363b;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-left: auto;
+  margin-bottom: 10px;
+  padding: 5px;
+  width: 75px;
+  height: 20px;
+
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+
+  color: #fff;
+  background-color: #2cac60;
+
+  border: none;
+  border-radius: 3px;
+
+  cursor: pointer;
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: #1d974e;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    flex-direction: row;
+    padding: 10px 0;
+  }
+  .name {
+    font-size: 18px;
+    margin-right: 10px;
+    margin-bottom: 0;
+  }
+
+  .btn {
+    margin-bottom: 0;
+    padding: 7px;
+    width: 80px;
+    height: 21px;
+  }
 }

@@ -1,3 +1,4 @@
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { useDispatch } from 'react-redux';
 import { useEffect, Suspense, lazy } from 'react';
 import { Switch } from 'react-router-dom';
@@ -8,6 +9,8 @@ import AppBar from 'components/AppBar';
 
 import PrivateRoute from 'components/PrivateRoute';
 import PublicRoute from 'components/PublicRoute';
+import Loader from "react-loader-spinner";
+
 
 
 const HomePage = lazy(() => import('./views/HomePage'));
@@ -27,7 +30,7 @@ function App() {
         <Container>
           <AppBar />
           <Switch>
-            <Suspense fallback={<p>Загружаем...</p>}>
+            <Suspense fallback={<Loader type="TailSpin" color="#00BFFF" height={80} width={80} position="fixed" top="50%" left="50%" transform="translate(-50%, -50%)"/>}>
               <PublicRoute exact path="/">
                 <HomePage/>
               </PublicRoute>

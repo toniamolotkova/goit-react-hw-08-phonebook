@@ -1,5 +1,6 @@
 import React from 'react';
 import { useField } from 'formik';
+import s from './MyTextInput.module.css';
 
  
  const MyTextInput = ({ label, ...props }) => {
@@ -7,10 +8,10 @@ import { useField } from 'formik';
    const [field, meta] = useField(props);
    return (
      <>
-       <label htmlFor={props.id || props.name}>{label}</label>
-       <input className="text-input" {...field} {...props} />
+       <label className={ s.label} htmlFor={props.id || props.name}>{label}</label>
+       <input className={s.input} {...field} {...props} />
        {meta.touched && meta.error ? (
-         <div className="error">{meta.error}</div>
+         <div className={s.error}>{meta.error}</div>
        ) : null}
      </>
    );

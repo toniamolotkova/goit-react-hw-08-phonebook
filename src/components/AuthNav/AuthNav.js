@@ -3,7 +3,7 @@ import s from './AuthNav.module.css';
 
 const AuthNav = () => {
     return (
-            <div>
+      <div className={ s.wrap}>
       <NavLink
         to="/register"
         exact
@@ -18,7 +18,7 @@ const AuthNav = () => {
         className={s.link}
         activeClassName={s.activeLink}
       >
-        login
+        Login
       </NavLink>
     </div>
     )

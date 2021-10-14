@@ -1,7 +1,13 @@
+.nav {
+  display: flex;
+  flex-direction: column;
+}
+
 .link {
-  padding: 10px 0;
-  margin-right: 10px;
-  font-size: 30px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  font-size: 14px;
+  font-weight: 700;
 
   text-align: left;
   text-transform: uppercase;
@@ -11,4 +17,16 @@
 
 .activeLink {
   color: #2cac60;
+}
+
+@media screen and (min-width: 768px) {
+  .nav {
+    display: inline-block;
+    padding: 10px 0;
+  }
+  .link {
+    font-size: 18px;
+    margin-right: 10px;
+    padding: 10px 0;
+  }
 }

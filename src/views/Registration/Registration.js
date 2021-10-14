@@ -5,6 +5,8 @@ import { MyTextInput } from 'components/MyTextInput/MyTextInput';
 import authOperations from 'redux/auth/auth-operations';
 import { useDispatch } from 'react-redux';
 import { useCallback } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const validationSchema = Yup.object({
@@ -30,9 +32,16 @@ const Registration = () => {
     confirmPassword: ''
   }
 
-  const handleSubmit = useCallback((values, { setSubmitting, resetForm }) => {
+  const handleSubmit = useCallback( async (values, { setSubmitting, resetForm }) => {
     const { name, email, password } = values;
-    dispatch(authOperations.register({name, email, password}));
+    try {
+      await dispatch(authOperations.register({name, email, password}));
+    } catch (error){
+                if (error.message === 400) {
+                  toast.error('Incorrect password or login');
+      }
+    }
+    
     console.log(values)
     setSubmitting(false);
     resetForm({values: ''})
@@ -53,7 +62,7 @@ const Registration = () => {
           placeholder="Sara"/>
         
         <MyTextInput
-             label="Email Address"
+             label="Your email"
              name="email"
              type="email"
              placeholder="jane@formik.com"/>
@@ -69,7 +78,7 @@ const Registration = () => {
           name="confirmPassword"
           type="password"/>
 
-            <button type="submit" disabled={!(formik.dirty && formik.isValid)}>Submit</button>
+            <button className={ s.btn} type="submit" disabled={!(formik.dirty && formik.isValid)}>Submit</button>
       </Form>
         ) }
     </Formik>

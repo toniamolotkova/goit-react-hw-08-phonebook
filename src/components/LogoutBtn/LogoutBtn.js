@@ -10,7 +10,7 @@ const LogoutBtn = () => {
   const dispatch = useDispatch();
     return (
             <div className={s.container}>
-        <p className={s.name}>Добро пожаловать, { name}</p>
+        <p className={s.name}>Welcome, { name}</p>
         <button className={s.btn} type="button" onClick={() => dispatch(authOperations.logOut())}>
         Logout
       </button>
